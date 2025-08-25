@@ -1,0 +1,43 @@
+[project]
+name = "SynPair"
+version = "0.1.0"
+description = "Synthetic pairing of heavy and light antibody chains"
+authors = [
+    { name = "Oliver M. Turnbull" }
+]
+license = { file = "LICENSE" }
+
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "lightning>=2.5.1.post0",
+    "pandas>=2.2.3",
+    "peft>=0.15.2",
+    "protobuf>=6.30.2",
+    "rjieba>=0.1.13",
+    "scikit-learn>=1.6.1",
+    "seaborn>=0.13.2",
+    "tensorboard>=2.19.0",
+    "tokenizers>=0.21.1",
+    "transformers>=4.51.3",
+    "wandb>=0.19.10",
+    "matplotlib>=3.10.0",
+    "scipy>=1.13.1",
+    "numpy>=1.26.4",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff.lint]
+exclude = [
+    "*.ipynb",
+    "curriculum_mods/*",
+    "model-*/",
+]
