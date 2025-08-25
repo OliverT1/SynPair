@@ -30,6 +30,10 @@ source .venv/bin/activate
 
 Note: FAISS is system-specific. Install via conda as per the FAISS docs if you plan to use indexing/search.
 
+### Base model
+
+You can change the base masked protein LM by editing `HF_MODEL` in `src/synpair/constants.py` to any Hugging Face masked protein language model.
+
 ### Examples
 
 See `pairing_pipeline.sh` for end-to-end example commands covering training, embedding, indexing (FAISS), and pairing.
