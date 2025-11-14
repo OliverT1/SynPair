@@ -130,9 +130,9 @@ if __name__ == "__main__":
 
     vh_ids, vh_vecs, _ = load_embeddings(args.vh_dir)
     vl_ids, vl_vecs, _ = load_embeddings(args.vl_dir)
-    
+
     # Convert to bytes for exact comparison
-    as_bytes = vl_vecs.view(dtype='S' + str(vl_vecs.shape[1] * vl_vecs.itemsize))
+    as_bytes = vl_vecs.view(dtype="S" + str(vl_vecs.shape[1] * vl_vecs.itemsize))
     unique_vecs, counts = np.unique(as_bytes, return_counts=True)
 
     num_total = len(vl_vecs)
@@ -222,6 +222,9 @@ if __name__ == "__main__":
         writer.writerow(["vh_id", "vl_id", "rank", "score"])
         for q, (row_i, row_d) in enumerate(zip(I, D)):
             for rank, (j, score) in enumerate(zip(row_i, row_d), 1):
+                if j < 0:
+                    # FAISS returns -1 for no match, prevents erroneously writing out final vl_id as match
+                    continue
                 writer.writerow([vh_ids[q], vl_ids[j], rank, f"{score:.4f}"])
 
     print(f"Saved top‑{args.top_k} pairs to {args.out} (CSV format)")
